@@ -80,59 +80,36 @@ class MinHeap {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         
-        // Ask the user to input the size of the heap
-        System.out.println("Enter the size of the heap:");
-        int heapSize = scanner.nextInt();
+        System.out.print("Enter the maximum size of the heap: ");
+        int maxSize = sc.nextInt();
         
-        // Create the heap with user-defined size
-        MinHeap h = new MinHeap(heapSize);
-        
-        // Asking user to input how many elements they want to insert
-        System.out.println("Enter the number of elements to insert into the heap:");
-        int numElements = scanner.nextInt();
+        MinHeap h = new MinHeap(maxSize);
 
-        // Check if the number of elements is greater than the heap size
-        if (numElements > heapSize) {
-            System.out.println("Error: Number of elements exceeds the heap size.");
-            return;
-        }
-
-        // Inserting elements from user input
-        System.out.println("Enter the elements:");
-        for (int i = 0; i < numElements; i++) {
-            int element = scanner.nextInt();
+        System.out.print("Enter the number of elements you want to insert: ");
+        int n = sc.nextInt();
+        
+        System.out.println("Enter the elements to be inserted into the heap:");
+        for (int i = 0; i < n; i++) {
+            int element = sc.nextInt();
             h.insertKey(element);
         }
 
         System.out.println("The current size of the heap is " + h.curSize());
         System.out.println("The current minimum element is " + h.getMin());
 
-        // Allow user to perform operations like removing the min element
-        System.out.println("Do you want to remove the minimum element? (yes/no)");
-        String response = scanner.next();
-        if (response.equalsIgnoreCase("yes")) {
-            h.removeMin();
-            System.out.println("The minimum element was removed.");
-        }
+        System.out.println("Removing the minimum element...");
+        h.removeMin();
+        System.out.println("The current size of the heap is " + h.curSize());
 
+        System.out.print("Enter a new element to insert into the heap: ");
+        int newElement = sc.nextInt();
+        h.insertKey(newElement);
+        
         System.out.println("The current size of the heap is " + h.curSize());
         System.out.println("The current minimum element is " + h.getMin());
 
-        // Asking user for more insertions if desired
-        System.out.println("Do you want to insert more elements? (yes/no)");
-        response = scanner.next();
-        while (response.equalsIgnoreCase("yes")) {
-            System.out.println("Enter the element to insert:");
-            int newElement = scanner.nextInt();
-            h.insertKey(newElement);
-            System.out.println("The current size of the heap is " + h.curSize());
-            System.out.println("The current minimum element is " + h.getMin());
-            System.out.println("Do you want to insert another element? (yes/no)");
-            response = scanner.next();
-        }
-
-        scanner.close();
+        sc.close();
     }
 }
