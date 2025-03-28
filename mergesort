@@ -1,0 +1,90 @@
+import java.util.*;
+
+public class Merge {
+
+    public static void merge(int a[], int low, int mid, int high) {
+
+        // Length of two subarrays
+        int n1 = mid - low + 1;
+        int n2 = high - mid;
+
+        // Temporary arrays to hold left and right subarrays
+        int[] l = new int[n1];
+        int[] r = new int[n2];
+
+        // Copy data to temporary arrays l[] and r[]
+        for (int i = 0; i < n1; i++) {
+            l[i] = a[low + i];
+        }
+        for (int j = 0; j < n2; j++) {
+            r[j] = a[mid + 1 + j];
+        }
+
+        // Merge the temporary arrays back into a[]
+        int i = 0, j = 0;
+        int k = low;
+
+        while (i < n1 && j < n2) {
+            if (l[i] <= r[j]) {
+                a[k] = l[i];
+                i++;
+            } else {
+                a[k] = r[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copy any remaining elements of l[]
+        while (i < n1) {
+            a[k] = l[i];
+            i++;
+            k++;
+        }
+
+        // Copy any remaining elements of r[]
+        while (j < n2) {
+            a[k] = r[j];
+            j++;
+            k++;
+        }
+    }
+
+    public static void sort(int a[], int low, int high) {
+        if (low < high) {
+            int mid = (low + high) / 2;
+
+            // Sort first and second halves
+            sort(a, low, mid);
+            sort(a, mid + 1, high);
+
+            // Merge the sorted halves
+            merge(a, low, mid, high);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the number of elements");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+
+        System.out.println("Enter the elements:");
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        System.out.println("Given array:\n" + Arrays.toString(a));
+
+        long start = System.nanoTime();
+
+        sort(a, 0, n - 1);
+
+        long end = System.nanoTime();
+
+        System.out.println("Sorted array:\n" + Arrays.toString(a));
+        System.out.println("Time taken: " + (end - start) + " ns");
+
+    }
+}
