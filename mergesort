@@ -4,15 +4,15 @@ public class Merge {
 
     public static void merge(int a[], int low, int mid, int high) {
 
-        // Length of two subarrays
+        
         int n1 = mid - low + 1;
         int n2 = high - mid;
 
-        // Temporary arrays to hold left and right subarrays
+        
         int[] l = new int[n1];
         int[] r = new int[n2];
 
-        // Copy data to temporary arrays l[] and r[]
+        
         for (int i = 0; i < n1; i++) {
             l[i] = a[low + i];
         }
@@ -20,7 +20,7 @@ public class Merge {
             r[j] = a[mid + 1 + j];
         }
 
-        // Merge the temporary arrays back into a[]
+    
         int i = 0, j = 0;
         int k = low;
 
@@ -35,14 +35,14 @@ public class Merge {
             k++;
         }
 
-        // Copy any remaining elements of l[]
+        
         while (i < n1) {
             a[k] = l[i];
             i++;
             k++;
         }
 
-        // Copy any remaining elements of r[]
+    
         while (j < n2) {
             a[k] = r[j];
             j++;
@@ -54,11 +54,11 @@ public class Merge {
         if (low < high) {
             int mid = (low + high) / 2;
 
-            // Sort first and second halves
+            
             sort(a, low, mid);
             sort(a, mid + 1, high);
 
-            // Merge the sorted halves
+            
             merge(a, low, mid, high);
         }
     }
