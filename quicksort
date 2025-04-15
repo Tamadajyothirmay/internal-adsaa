@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.Arrays;
 public class QuickSort {
 
     
@@ -41,37 +41,33 @@ public class QuickSort {
         arr[i] = arr[j];
         arr[j] = temp;
     }
+   public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-  
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-      
-        System.out.print("Enter the number of elements in the array: ");
-        int n = scanner.nextInt();
-
-      
+        System.out.println("Enter the number of elements");
+        int n = sc.nextInt();
         int[] arr = new int[n];
 
-        
-        System.out.println("Enter " + n + " elements:");
+        System.out.println("Enter the elements:");
         for (int i = 0; i < n; i++) {
-            arr[i] = scanner.nextInt();
+            arr[i] = sc.nextInt();
         }
 
-        System.out.println("\nUnsorted array:");
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
+        System.out.println("Given array:"+ Arrays.toString(arr));
 
-       
+        long start = System.nanoTime();
+
         quickSort(arr, 0, n - 1);
 
-        System.out.println("\nSorted array:");
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
+        long end = System.nanoTime();
 
-        scanner.close(); 
-    }
+        System.out.println("Sorted array:\n"+ Arrays.toString(arr));
+        System.out.println("Time taken: " + (end - start) + " ns");
+  
+       }
 }
+
+
+        
+
+      
